@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#141210" />
+  <meta name="description" content="A dark Pomodoro timer with a task list. 25/5 by default, saved in this browser." />
+  <title>Focus — Pomodoro</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23141210'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23e59a45' stroke-width='2.5'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,560;1,9..144,640&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-mode="work">
+  <div class="ambient" aria-hidden="true"></div>
+  <main class="app">
+    <header class="mast">
+      <div class="brand">
+        <span class="mark" aria-hidden="true"></span>
+        <div>
+          <p class="eyebrow">Focus</p>
+          <h1>Pomodoro</h1>
+        </div>
+      </div>
+      <p class="sessions" id="sessions">No work sessions yet</p>
+    </header>
+
+    <section class="panel timer-panel" aria-labelledby="timer-heading">
+      <h2 id="timer-heading" class="sr-only">Timer</h2>
+      <div class="dial">
+        <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="ring-track" cx="60" cy="60" r="52"></circle>
+          <circle class="ring-value" id="ring" cx="60" cy="60" r="52" transform="rotate(-90 60 60)"></circle>
+        </svg>
+        <div class="dial-readout">
+          <p class="mode"><span class="pulse" id="pulse" hidden></span><span id="mode-label">Work</span></p>
+          <p class="time" id="time">25:00</p>
+        </div>
+      </div>
+      <p class="status" id="status" aria-live="polite">A work session is ready.</p>
+      <div class="controls">
+        <button type="button" class="btn primary" id="toggle" aria-keyshortcuts="Space">Start</button>
+        <button type="button" class="btn ghost" id="reset">Reset</button>
+      </div>
+      <p class="kbd">Press <kbd>Space</kbd> to start or pause</p>
+      <form class="durations" id="durations">
+        <label>
+          Work
+          <span class="field">
+            <input id="work-minutes" type="number" min="1" max="180" step="1" value="25" inputmode="numeric" autocomplete="off" />
+            <span>min</span>
+          </span>
+        </label>
+        <label>
+          Break
+          <span class="field">
+            <input id="break-minutes" type="number" min="1" max="180" step="1" value="5" inputmode="numeric" autocomplete="off" />
+            <span>min</span>
+          </span>
+        </label>
+      </form>
+      <p class="attached" id="attached">Add a task to collect finished sessions.</p>
+    </section>
+
+    <section class="panel task-panel" aria-labelledby="tasks-heading">
+      <div class="tasks-head">
+        <h2 id="tasks-heading">Tasks</h2>
+        <p class="tasks-meta" id="tasks-meta">None yet</p>
+      </div>
+      <form id="task-form" class="task-form">
+        <label class="sr-only" for="task-input">New task</label>
+        <input id="task-input" type="text" maxlength="140" placeholder="What are you working on?" autocomplete="off" required />
+        <button type="submit" class="btn primary">Add</button>
+      </form>
+      <p class="empty" id="empty">No tasks yet. Add one and finished work sessions will collect on it.</p>
+      <ul id="task-list" class="task-list"></ul>
+    </section>
+  </main>
+  <noscript>
+    <p class="noscript">Focus needs JavaScript to run the timer.</p>
+  </noscript>
+  <script src="timer.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
